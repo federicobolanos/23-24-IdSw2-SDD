@@ -11,7 +11,7 @@ public class Heroe extends Personaje {
 
 	public Heroe() {
 
-		super(150, 20, 2, 0.5);
+		super(150, 20, 2, 0.5, "Heroe");
 
 		armas = new Arma[] {
 				new Arma(7, 0.5),

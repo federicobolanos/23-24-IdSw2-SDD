@@ -11,7 +11,7 @@ public class Asesino extends Personaje {
 
     public Asesino() {
 
-        super(150, 20, 2, 0.5);
+        super(150, 20, 2, 0.5, "Asesino");
 
         armas = new Arma[] {
                 new Arma(3, 0.5), // Dardo con veneno
