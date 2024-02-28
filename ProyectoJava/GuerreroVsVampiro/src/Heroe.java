@@ -45,7 +45,7 @@ public class Heroe extends Personaje {
 				"3 - Hacha (Ataque: 30 | Probabilidad de éxito 12 %)");
 
 		if (turnosRestantesParaAtacar < 1) {
-			System.out.println("Pulsa 4 para tomar una poción:");
+			System.out.println("4 - para tomar una poción(No podras atacar o defender por 3 turnos)");
 		}
 		int eleccion = scanner.nextInt();
 
