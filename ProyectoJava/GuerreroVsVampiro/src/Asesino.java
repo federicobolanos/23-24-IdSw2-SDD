@@ -39,13 +39,16 @@ public class Asesino extends Personaje {
     }
 
     private void handleTurnoAsesino(Personaje objetivo) {
-        System.out.println("Elige un arma para atacar:\n" +
-                "1 - Dardo con veneno (Ataque: 3 | Probabilidad de éxito 50 %)\n" +
-                "2 - Ballesta (Ataque: 5 cada flecha [2 flechas] | Probabilidad de éxito 25 % cada flecha)\n" +
-                "3 - Estoque (Ataque: 20 | Probabilidad de éxito 30 %)");
+        System.out.println(
+                "┌───────────────────────────────────────────────────────────────────────────────────────┐\n"
+                        +
+                        "|Elige un arma para atacar:\n" +
+                        "|1 - Dardo con veneno (Ataque: 3 | Probabilidad de éxito 50 %)\n" +
+                        "|2 - Ballesta (Ataque: 5 cada flecha [2 flechas] | Probabilidad de éxito 25 % cada flecha)\n" +
+                        "|3 - Estoque (Ataque: 20 | Probabilidad de éxito 30 %)");
 
         if (turnosRestantesParaAtacar < 1) {
-            System.out.println("4 - para tomar una poción(No podras atacar o defender por 3 turnos)");
+            System.out.println("|4 - para tomar una poción(No podras atacar o defender por 3 turnos)");
         }
         int eleccion = scanner.nextInt();
 
@@ -58,21 +61,34 @@ public class Asesino extends Personaje {
             Arma armaElegida = armas[eleccion - 1];
 
             if (Math.random() < armaElegida.getProb()) {
+                // Limpia la pantalla
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 if (eleccion == 1) {
                     objetivo.recibirDano(armaElegida.getAtaque());
                     System.out.println("El Asesino ataca con éxito usando el arma " + eleccion);
                     aplicarVeneno(objetivo);
                 } else if (eleccion == 2) {
+                    // Limpia la pantalla
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                     for (int i = 0; i < 2; i++) {
                         objetivo.recibirDano(armaElegida.getAtaque());
+
                     }
                     System.out.println("El Asesino ataca con éxito usando el arma " + eleccion);
                 } else {
+                    // Limpia la pantalla
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
                     objetivo.recibirDano(armaElegida.getAtaque());
                     System.out.println("El Asesino ataca con éxito usando el arma " + eleccion);
                 }
 
             } else {
+                // Limpia la pantalla
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 System.out.println("El Asesino falla el ataque.");
             }
         } else if (eleccion == 4) {
@@ -81,6 +97,7 @@ public class Asesino extends Personaje {
         }
 
         dejarDeDefender();
+
     }
 
     private void aplicarVeneno(Personaje objetivo) {

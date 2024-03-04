@@ -48,6 +48,7 @@ public class Juego {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Selecciona tu personaje: 1 - Heroe, 2 - Asesino");
         int opcion = scanner.nextInt();
+        limpiarPantalla();
 
         if (opcion == 1) {
             return new Heroe();
@@ -57,6 +58,12 @@ public class Juego {
             System.out.println("Opción inválida. Seleccionando al Heroe por defecto.");
             return new Heroe();
         }
+    }
+
+    private void limpiarPantalla() {
+        // Limpia la pantalla
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public static void main(String[] args) {

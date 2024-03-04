@@ -27,6 +27,7 @@ public class Heroe extends Personaje {
 
 		if (turnosRestantesParaAtacar == 0) {
 			handleTurnoHeroe(objetivo);
+
 		} else {
 			turnosRestantesParaAtacar--;
 			if (turnosRestantesParaAtacar == 0) {
@@ -39,13 +40,16 @@ public class Heroe extends Personaje {
 	}
 
 	private void handleTurnoHeroe(Personaje objetivo) {
-		System.out.println("Elige un arma para atacar:\n" +
-				"1 - Cuchillo (Ataque: 7 | Probabilidad de éxito 50 %)\n" +
-				"2 - Espada (Ataque: 15 | Probabilidad de éxito 25 %)\n" +
-				"3 - Hacha (Ataque: 30 | Probabilidad de éxito 12 %)");
+		System.out.println(
+				"┌─────────────────────────────────────────────────────────────────────┐\n"
+						+
+						"|Elige un arma para atacar:\n" +
+						"|1 - Cuchillo (Ataque: 7 | Probabilidad de éxito 50 %)\n" +
+						"|2 - Espada (Ataque: 15 | Probabilidad de éxito 25 %)\n" +
+						"|3 - Hacha (Ataque: 30 | Probabilidad de éxito 12 %)");
 
 		if (turnosRestantesParaAtacar < 1) {
-			System.out.println("4 - para tomar una poción(No podras atacar o defender por 3 turnos)");
+			System.out.println("|4 - Tomar una poción (No podras atacar o defender por 3 turnos)");
 		}
 		int eleccion = scanner.nextInt();
 
@@ -58,19 +62,27 @@ public class Heroe extends Personaje {
 			Arma armaElegida = armas[eleccion - 1];
 
 			if (Math.random() < armaElegida.getProb()) {
-
+				// Limpia la pantalla
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
 				objetivo.recibirDano(armaElegida.getAtaque());
 				System.out.println("El Guerrero ataca con éxito usando el arma " + eleccion);
 
 			} else {
+				// Limpia la pantalla
+				System.out.print("\033[H\033[2J");
+				System.out.flush();
 				System.out.println("El Guerrero falla el ataque.");
+
 			}
+
 		} else if (eleccion == 4) {
 			tomarPocion();
 			System.out.println("EL guerrero ha tomado una pocion. No podras atacar o defender por 3 turnos");
 		}
 
 		dejarDeDefender();
+
 	}
 
 	public Arma[] getArmas() {
