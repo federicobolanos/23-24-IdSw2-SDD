@@ -44,7 +44,7 @@ public class Asesino extends Personaje {
                         +
                         "|Elige un arma para atacar:\n" +
                         "|1 - Dardo con veneno (Ataque: 3 | Probabilidad de éxito 50 %)\n" +
-                        "|2 - Ballesta (Ataque: 5 cada flecha [2 flechas] | Probabilidad de éxito 25 % cada flecha)\n" +
+                        "|2 - Ballesta (Ataque: 5  | Probabilidad de éxito 25 %)\n" +
                         "|3 - Estoque (Ataque: 20 | Probabilidad de éxito 30 %)");
 
         if (turnosRestantesParaAtacar < 1) {
@@ -67,15 +67,15 @@ public class Asesino extends Personaje {
                 if (eleccion == 1) {
                     objetivo.recibirDano(armaElegida.getAtaque());
                     System.out.println("El Asesino ataca con éxito usando el arma " + eleccion);
-                    aplicarVeneno(objetivo);
+
+                    // ataque con la ballesta
                 } else if (eleccion == 2) {
                     // Limpia la pantalla
                     System.out.print("\033[H\033[2J");
                     System.out.flush();
-                    for (int i = 0; i < 2; i++) {
-                        objetivo.recibirDano(armaElegida.getAtaque());
 
-                    }
+                    objetivo.recibirDano(armaElegida.getAtaque());
+
                     System.out.println("El Asesino ataca con éxito usando el arma " + eleccion);
                 } else {
                     // Limpia la pantalla
@@ -98,11 +98,6 @@ public class Asesino extends Personaje {
 
         dejarDeDefender();
 
-    }
-
-    private void aplicarVeneno(Personaje objetivo) {
-        objetivo.recibirDano(3);
-        System.out.println("El veneno hace 3 de daño por 3 turnos.");
     }
 
     public Arma[] getArmas() {
