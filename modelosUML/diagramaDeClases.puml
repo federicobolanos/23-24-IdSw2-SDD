@@ -1,0 +1,42 @@
+@startuml
+
+class Juego{
+  - turnos: int
+  - personajes[]: Personaje
+  - ganador: Personaje
+  + elegirPersonaje(): Personaje
+  + iniciar(Personaje, Personaje)
+  + gestionarTurnos():void
+}
+
+abstract Personaje{
+  + estaVivo()
+  + estaDesmayado()
+  + recuperarEnergia()
+  + atacar(Personaje)
+  + recibirDano(int)
+}
+
+class Heroe {
+  - defendiendo: boolean
+  - turnosRestantesParaAtacar: int
+  + tomarPocion(): void
+}
+
+class Villano{
+
+}
+
+class Arma {
+  - nombre: string
+  - daño: int
+  - probExito: double
+}
+
+Juego -- Personaje
+Heroe -r- Arma
+Villano -l- Arma
+Personaje <|-- Heroe
+Personaje <|-- Villano
+
+@enduml
