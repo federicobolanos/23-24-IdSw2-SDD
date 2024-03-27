@@ -52,14 +52,14 @@ public class Heroe extends Personaje {
 			if (Math.random() < armaElegida.getProb()) {
 
 				objetivo.recibirDano(armaElegida.getAtaque());
-				System.out.println("El Guerrero ataca con éxito usando el arma " + eleccion);
+				System.out.println("El heroe ataca con éxito usando el arma " + eleccion);
 
 			} else {
-				System.out.println("El Guerrero falla el ataque.");
+				System.out.println("El heroe falla el ataque.");
 			}
 		} else if (eleccion == 4) {
 			tomarPocion();
-			System.out.println("El Guerrero ha tomado una poción. No podras atacar o defender por 3 turnos");
+			System.out.println("El heroe ha tomado una poción. No podras atacar o defender por 3 turnos");
 		}
 
 		dejarDeDefender();
