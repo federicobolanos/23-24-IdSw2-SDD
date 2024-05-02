@@ -11,7 +11,7 @@ public class Heroe extends Personaje {
 	public Heroe(int energia, int poder, int ataque, double prob_exito, String nombre) {
 		super(energia, poder, ataque, prob_exito, nombre);
 		scanner = new Scanner(System.in);
-		//if statement con los datos de cada personaje?
+		// if statement con los datos de cada personaje?
 	}
 
 	@Override
@@ -23,21 +23,33 @@ public class Heroe extends Personaje {
 			turnosRestantesParaAtacar--;
 			if (turnosRestantesParaAtacar == 0) {
 				this.setPoder(20);
-				System.out.println("El " + this.getNombre() + "ha sobrevivido 3 turnos. Ahora tiene todo su poder de regreso.");
+				System.out.println(
+						"El " + this.getNombre() + "ha sobrevivido 3 turnos. Ahora tiene todo su poder de regreso.");
 				handleTurnoHeroe(objetivo);
 			}
 		}
 
 	}
 
+	private void limpiarPantalla() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
 	private void handleTurnoHeroe(Personaje objetivo) {
 		System.out.println("Elige un arma para atacar:\n" +
-				"1 - " + this.armas[0].getNombre() + " (Ataque: " + this.armas[0].getAtaque() + " | Probabilidad de éxito: " + this.armas[0].getProb() + " %)\n" +
-				"2 - " + this.armas[1].getNombre() + " (Ataque: " + this.armas[0].getAtaque() + " | Probabilidad de éxito: " + this.armas[0].getProb() + " %)\n" +
-				"3 - " + this.armas[2].getNombre() + " (Ataque: " + this.armas[0].getAtaque() + " | Probabilidad de éxito: " + this.armas[0].getProb() + " %)");
+				"1 - " + this.armas[0].getNombre() + " (Ataque: " + this.armas[0].getAtaque()
+				+ " | Probabilidad de éxito: " + this.armas[0].getProb() + " %)\n" +
+				"2 - " + this.armas[1].getNombre() + " (Ataque: " + this.armas[1].getAtaque()
+				+ " | Probabilidad de éxito: " + this.armas[1].getProb() + " %)\n" +
+				"3 - " + this.armas[2].getNombre() + " (Ataque: " + this.armas[2].getAtaque()
+				+ " | Probabilidad de éxito: " + this.armas[2].getProb() + " %)\n" + 
+				"4 - " + this.armas[3].getNombre() + " (Ataque: " + this.armas[3].getAtaque()
+				+ " | Probabilidad de éxito: " + this.armas[3].getProb() + " %)\n");
+		
 
 		if (turnosRestantesParaAtacar < 1) {
-			System.out.println("4 - Poción (No puedes atacar o defender por 3 turnos)");
+			System.out.println("5 - Poción (No puedes atacar o defender por 3 turnos)");
 		}
 		int eleccion = scanner.nextInt();
 
@@ -46,23 +58,30 @@ public class Heroe extends Personaje {
 			eleccion = scanner.nextInt();
 		}
 
-		if (eleccion < 4) {
+		if (eleccion < 5) {
 			Arma armaElegida = this.armas[eleccion - 1];
 
 			if (Math.random() < armaElegida.getProb()) {
 
-				objetivo.recibirDano(armaElegida.getAtaque());
-				System.out.println("El heroe ataca con éxito usando el arma " + eleccion);
+				if (eleccion < 4) {
+					objetivo.recibirDano(armaElegida.getAtaque());
+					System.out.println("El Guerrero ataca con éxito usando el arma " + eleccion);
+				} else if (eleccion == 4){
+					this.defender();
+					objetivo.recibirDano(armaElegida.getAtaque());
+					System.out.println("El Guerro bloquea el ataque con éxito usando el " + eleccion);
+				}
 
 			} else {
-				System.out.println("El heroe falla el ataque.");
+				System.out.println("El Guerrero falla el ataque.");
 			}
-		} else if (eleccion == 4) {
+		} else if (eleccion == 5) {
 			tomarPocion();
-			System.out.println("El heroe ha tomado una poción. No podras atacar o defender por 3 turnos");
+			System.out.println("El Guerrero ha tomado una poción. No podras atacar o defender por 3 turnos");
 		}
 
 		dejarDeDefender();
+		limpiarPantalla();
 	}
 
 	public Arma[] getArmas() {

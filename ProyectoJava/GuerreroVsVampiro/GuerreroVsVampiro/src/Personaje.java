@@ -8,7 +8,7 @@ public abstract class Personaje {
 	protected double prob_exito;
 	protected String nombre;
 	protected Random random;
-	protected Arma[] armas = new Arma[3];
+	protected Arma[] armas = new Arma[4];
 
 	protected static final int UMBRAL_DESMAYO = 0;
 	protected static final int RECUPERACION_ENERGIA = 0;
@@ -33,10 +33,11 @@ public abstract class Personaje {
 	public Arma[] getArmas(){
 		return armas;
 	}
-	public void setArmas(String nombre0, int ataque0, double prob_exito0, String nombre1, int ataque1, double prob_exito1, String nombre2, int ataque2, double prob_exito2){
+	public void setArmas(String nombre0, int ataque0, double prob_exito0, String nombre1, int ataque1, double prob_exito1, String nombre2, int ataque2, double prob_exito2, String nombre3, int ataque3, double prob_exito3){
 		this.armas[0] = new Arma(nombre0, ataque0, prob_exito0);
 		this.armas[1] = new Arma(nombre1, ataque1, prob_exito1);
 		this.armas[2] = new Arma(nombre2, ataque2, prob_exito2);
+		this.armas[3] = new Arma(nombre3, ataque3, prob_exito3);
 	}
 	public int getPoder() {
 		return poder;
@@ -89,5 +90,9 @@ public abstract class Personaje {
 		if (estaDesmayado()) {
 			setEnergia(Math.min(getEnergia() + RECUPERACION_ENERGIA, getEnergia()));
 		}
+	}
+	
+	public void bloquearAtaque(int daño) {
+		this.energia += daño;
 	}
 }
